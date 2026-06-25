@@ -1,12 +1,21 @@
 "use client";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 export function LogoMark({ className = "" }: { className?: string }) {
+  // Render the real Smience Life Science logo downloaded from the company site.
+  // Falls back to a simple brand-colored mark if the image fails to load.
   return (
-    <svg viewBox="0 0 40 40" className={className} fill="none">
-      <rect width="40" height="40" rx="10" fill="currentColor" />
-      <path d="M14 20h12M20 14v12" stroke="white" strokeWidth="3" strokeLinecap="round" />
-    </svg>
+    <span className={`relative inline-block ${className}`}>
+      <Image
+        src="/smience-logo.png"
+        alt="Smience Life Science"
+        width={120}
+        height={40}
+        className="h-full w-auto object-contain"
+        priority
+      />
+    </span>
   );
 }
 

@@ -20,7 +20,7 @@ export default function SettingsPage() {
           <h3 className="font-semibold text-ink-900 mb-4">Pharmacy preferences</h3>
           <p className="text-sm text-ink-500 mb-4">Settings here apply across the workspace.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field label="Pharmacy name"><input className="input" defaultValue="PharmaCare Demo" /></Field>
+            <Field label="Pharmacy name"><input className="input" defaultValue="Smience Life Science" /></Field>
             <Field label="Currency"><select className="input" defaultValue="USD"><option>USD</option><option>INR</option><option>EUR</option></select></Field>
             <Field label="Low-stock alert threshold"><input className="input" defaultValue="10" /></Field>
             <Field label="Near-expiry window (days)"><input className="input" defaultValue="30" /></Field>

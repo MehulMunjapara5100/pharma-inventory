@@ -40,7 +40,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       <div className="hidden lg:flex flex-col justify-center p-12 bg-gradient-to-br from-mint-600 via-brand-700 to-brand-800 text-white">
-        <h1 className="text-4xl font-bold leading-tight max-w-md">Join PharmaCare and take control of your inventory.</h1>
+        <h1 className="text-4xl font-bold leading-tight max-w-md">Join Smience Life Science and take control of your inventory.</h1>
         <p className="mt-4 text-brand-50 max-w-md">Create an account for your team. Admins approve role-based access before activation.</p>
       </div>
       <div className="flex items-center justify-center p-6 sm:p-12 bg-white">

@@ -1,4 +1,4 @@
-# PharmaCare — Inventory Management
+# Smience Life Science — Inventory Management
 
 A modern, responsive web app for managing pharmaceutical inventory. Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Mongoose, and JWT cookie-based authentication.
 
