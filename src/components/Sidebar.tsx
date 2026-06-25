@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { Role } from "@/lib/roles";
+import { LogoMark } from "@/components/AuthUI";
 
 type NavItem = { href: string; label: string; icon: JSX.Element; roles: Role[] };
 
@@ -35,14 +36,12 @@ export function Sidebar({ role }: { role: Role }) {
       <aside className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-64 bg-white border-r border-ink-100 transform transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="px-5 py-5 border-b border-ink-100 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <span className="inline-flex w-9 h-9 rounded-lg bg-brand-600 text-white items-center justify-center">
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 6h6M12 3v18M3 12h18" /></svg>
-            </span>
-            <div className="leading-tight">
-              <p className="font-semibold text-ink-900">PharmaCare</p>
-              <p className="text-[11px] uppercase tracking-wider text-ink-400">{role} workspace</p>
-            </div>
-          </Link>
+                      <LogoMark className="h-8 w-auto" />
+                      <div className="leading-tight">
+                        <p className="font-semibold text-ink-900">Smience Life Science</p>
+                        <p className="text-[11px] uppercase tracking-wider text-ink-400">{role} workspace</p>
+                      </div>
+                    </Link>
           <button onClick={() => setOpen(false)} className="lg:hidden text-ink-500 hover:text-ink-700">
             <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M6 18L18 6"/></svg>
           </button>

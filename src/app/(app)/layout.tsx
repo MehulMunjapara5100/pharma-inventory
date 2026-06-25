@@ -28,7 +28,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         <Topbar user={{ name: me.name, email: me.email, role: me.role }} unread={unread} />
         <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden">{children}</main>
         <footer className="px-6 py-4 text-xs text-ink-400 border-t border-ink-100 bg-white">
-          © {new Date().getFullYear()} PharmaCare · <Link href="#" className="hover:underline">Help</Link> · <Link href="#" className="hover:underline">Privacy</Link>
+          © {new Date().getFullYear()} Smience Life Science · <Link href="#" className="hover:underline">Help</Link> · <Link href="#" className="hover:underline">Privacy</Link>
         </footer>
       </div>
       <ToastHost />
