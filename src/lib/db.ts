@@ -13,6 +13,18 @@ if (process.env.NODE_ENV !== "production") {
   // resolves SRV records correctly; skipping this avoids touching global
   // state that isn't ours.
   dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
+} else {
+  // Vercel's default DNS has been observed to refuse SRV for some Atlas
+  // clusters ("querySrv ECONNREFUSED _mongodb._tcp..."). Force the public
+  // resolvers in production too so serverless functions can connect.
+  try {
+    dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
+    if (typeof (dns as any).setDefaultResultOrder === "function") {
+      (dns as any).setDefaultResultOrder("ipv4first");
+    }
+  } catch {
+    // ignore – best-effort
+  }
 }
 
 // Load env explicitly from .env.local. Next.js auto-loads .env / .env.local
@@ -35,10 +47,13 @@ declare global {
 }
 
 function patchDns() {
-  if (process.env.NODE_ENV === "production") return;
+  // Apply in every environment. Vercel's resolver has been observed to fail
+  // SRV lookups for Atlas, so we always force the public resolvers.
   try {
     dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
-    dns.setDefaultResultOrder("ipv4first");
+    if (typeof (dns as any).setDefaultResultOrder === "function") {
+      (dns as any).setDefaultResultOrder("ipv4first");
+    }
   } catch {
     // ignore – not all platforms support setDefaultResultOrder
   }
@@ -68,6 +83,12 @@ export async function connectDB() {
     // Vercel; auto-create collections are off to avoid schema drift.
     autoCreate: false,
     autoIndex: false
+  }).catch((err) => {
+    // Drop the cached rejected promise so the next invocation retries
+    // the connect (otherwise a poisoned cache makes every request fail
+    // until the function cold-starts again).
+    global._mongooseConn = undefined;
+    throw err;
   });
   return global._mongooseConn;
 }
